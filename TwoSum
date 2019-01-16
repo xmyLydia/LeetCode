@@ -1,1 +1,21 @@
 
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        indiceList = []
+        for i in range(len(nums)):
+            num_a = nums[i]
+            for j in range(len(nums)):
+                num_b = nums[j]
+                if i!=j:
+                    sum = num_a + num_b
+                    if sum==target:
+                        if i not in indiceList:
+                         indiceList.append(i)
+                        if j not in indiceList:
+                         indiceList.append(j)
+        return indiceList
