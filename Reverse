@@ -1,0 +1,38 @@
+class Solution:
+    def reverse(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        overflow=2147483647
+        if x==0 :
+            return 0
+        if x>0:  
+            str_x = str(x)
+            str_new = ""
+            for i in range(len(str_x)):
+                    length = len(str_x) 
+                    val_temp = str_x[length-1-i]
+                    str_new+=val_temp
+            int_val = int(str_new)
+            if int_val<overflow and int_val>(overflow*(-1)):
+                return int(str_new)
+            else:
+                return 0
+        if(x<0):
+            x = x*(-1) 
+            str_new = ""
+            str_x = str(x)
+            for i in range(len(str_x)):
+                    length = len(str_x) 
+                    val_temp = str_x[length-1-i]
+                    str_new+=val_temp
+            int_val = int(str_new)
+            if int_val<overflow and int_val>(overflow*(-1)):
+                return int(str_new)*(-1)
+            else:
+                return 0
+        
+                  
+                
+        
