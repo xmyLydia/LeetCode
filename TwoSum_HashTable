@@ -1,0 +1,45 @@
+class Solution(object):
+    def twoSum(self, nums, target):
+
+        hashtable = {}
+        for i in range(len(nums)):
+            key = nums[i]
+            value = i
+            if key not in hashtable.keys():
+              hashtable[key]=value
+            else:
+                previous_val = hashtable[key]
+                if type(previous_val)==list:
+                    previous_val.append(i)
+                    hashtable[key] = previous_val
+                else:
+                 val = [previous_val,i]
+                 hashtable[key] = val
+        #use target - key to find out value
+        subtract = []
+        list_hashVal = []
+        for j in range(len(nums)):
+            val_subtract = target - nums[j]
+            if val_subtract in nums:
+             val_find = hashtable[val_subtract]
+             if val_find!=j: 
+                 if val_find not in list_hashVal:# [j,val_find]
+                     list_hashVal.append(val_find)
+                     if type(val_find)==list:
+                         for m in val_find:
+                             combination = [j,m]
+                             combination.sort()
+                             if combination not in subtract :
+                                 if j!=m:
+                                   subtract.append(combination)
+                     else:
+                         combination = [j,val_find]
+                         combination.sort()
+                         if combination not in subtract:
+                          subtract.append(combination)
+        # make  combination
+        if len(subtract)==1:
+            return subtract[0]
+        if len(subtract)==0:
+            return
+        return subtract 
