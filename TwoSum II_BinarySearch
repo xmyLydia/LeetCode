@@ -1,0 +1,36 @@
+class Solution:
+     
+       
+    def twoSum(self, nums, target):
+        for i in range(len(nums)):
+            val_a = nums[i]
+            subtract = target - val_a
+            if(subtract<0):
+                return 
+            else:
+                index_b = self.binarySearch(nums,subtract)
+                combination = [i+1,index_b+1]
+                if i>index_b:
+                    combination=[index_b+1,i+1]
+                 
+                if index_b !=-1:
+                    if i!=index_b:
+                        return combination
+                
+         
+                
+        return
+    def binarySearch(self,nums,val):
+        left = 0
+        right = len(nums)-1
+        
+        while left<=right:
+            middle_index = int((left+right)/2)
+            middle = nums[middle_index]
+            if val==middle:
+               return middle_index
+            if val<middle:
+                right = middle_index-1
+            if val>middle:
+                left = middle_index+1
+        return -1
