@@ -1,11 +1,14 @@
 package Array;
 
+import java.util.Arrays;
+
 public class Solution {
     public static void main(String[] args) {
-        int[] arr = new int[]{1, 0, 1};
+        int[] arr = new int[]{0, 0, 1, 3};
         Solution solution = new Solution();
-        //int a = solution.findMaxConsecutiveOnes(arr);
-        System.out.println(solution.countDigit(262));
+
+        solution.duplicateZeros(arr);
+        System.out.println(Arrays.toString(arr));
     }
 
 
@@ -72,21 +75,46 @@ public class Solution {
         for (int i = 0; i < A.length; i++) {
             A[i] = A[i] * A[i];
         }
-        placeNumberIntoArray(A);
+        Arrays.sort(A);
         return A;
     }
 
-    private void placeNumberIntoArray(int[] array) {
-        for (int i = 0; i < array.length; i++) {
-            int num = array[i];
-            for (int j = 0; j < array.length; j++) {
-                if (num > array[j]) {
-                    int temp = array[j];
-                    array[j] = num;
-                    array[i] = temp;
-                    j--;
-                }
+    /**
+     * Given a fixed length array arr of integers, duplicate each occurrence of zero,
+     * shifting the remaining elements to the right.
+     *
+     * @param arr
+     */
+    public void duplicateZeros(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            int temp = arr[i];
+            if (temp == 0) {
+                shiftToNext(i, arr);
+                arr[i] = 0;
+                i++;
             }
         }
     }
+
+    private void shiftToNext(int index, int[] arr) {
+        for (int i = arr.length - 1; i > index; i--) {
+            arr[i] = arr[i - 1];
+        }
+    }
+
+    /**
+     * Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array.
+     *
+     * @param nums1
+     * @param m
+     * @param nums2
+     * @param n
+     */
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        for (int i = m; i < m + n; i++) {
+            nums1[i] = nums2[i - m];
+        }
+        Arrays.sort(nums1);
+    }
+
 }
