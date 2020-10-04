@@ -1,14 +1,14 @@
 package Array;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Solution {
     public static void main(String[] args) {
-        int[] arr = new int[]{0, 0, 1, 3};
+        int[] arr = new int[]{3, 5, 2, 3};
         Solution solution = new Solution();
 
-        solution.duplicateZeros(arr);
-        System.out.println(Arrays.toString(arr));
+        solution.removeElement(arr, 3);
     }
 
 
@@ -116,5 +116,27 @@ public class Solution {
         }
         Arrays.sort(nums1);
     }
+
+    public int removeElement(int[] nums, int val) {
+        if (nums.length == 1) {
+            if (nums[0] == val) {
+                nums[0] = 0;
+                return 0;
+            } else {
+                return 1;
+            }
+        }
+//        int arrayLength = nums.length;
+//        int indexOfValue = Arrays.asList(nums).indexOf(val);
+//        while (indexOfValue != -1) {
+//            for (int i = indexOfValue; i < nums.length - 1; i++) {
+//                nums[i] = nums[i + 1];
+//            }
+//            arrayLength --;
+//            indexOfValue = Arrays.asList(nums).indexOf(val);
+//        }
+        return arrayLength;
+    }
+
 
 }
