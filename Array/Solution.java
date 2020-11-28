@@ -126,17 +126,26 @@ public class Solution {
                 return 1;
             }
         }
-//        int arrayLength = nums.length;
-//        int indexOfValue = Arrays.asList(nums).indexOf(val);
-//        while (indexOfValue != -1) {
-//            for (int i = indexOfValue; i < nums.length - 1; i++) {
-//                nums[i] = nums[i + 1];
-//            }
-//            arrayLength --;
-//            indexOfValue = Arrays.asList(nums).indexOf(val);
-//        }
-        return arrayLength;
+        boolean isContain = containValue(nums, val);
+        while (isContain) {
+            for (int i = 0; i < nums.length - 1; i++) {
+                if (val == nums[i]) {
+                    nums[i] = nums[i + 1];
+                }
+            }
+            isContain = containValue(nums, val);
+        }
+        return nums.length;
     }
 
+    private boolean containValue(int[] nums, int val) {
+        boolean isContain = false;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == val) {
+                return true;
+            }
+        }
+        return isContain;
+    }
 
 }
