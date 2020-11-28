@@ -118,34 +118,17 @@ public class Solution {
     }
 
     public int removeElement(int[] nums, int val) {
-        if (nums.length == 1) {
-            if (nums[0] == val) {
-                nums[0] = 0;
-                return 0;
-            } else {
-                return 1;
-            }
-        }
-        boolean isContain = containValue(nums, val);
-        while (isContain) {
-            for (int i = 0; i < nums.length - 1; i++) {
-                if (val == nums[i]) {
-                    nums[i] = nums[i + 1];
-                }
-            }
-            isContain = containValue(nums, val);
-        }
-        return nums.length;
-    }
-
-    private boolean containValue(int[] nums, int val) {
-        boolean isContain = false;
-        for (int i = 0; i < nums.length; i++) {
+        int i = 0;
+        int n = nums.length;
+        while (i < n) {
             if (nums[i] == val) {
-                return true;
+                nums[i] = nums[n - 1];
+                // reduce array size by one
+                n--;
+            } else {
+                i++;
             }
         }
-        return isContain;
+        return n;
     }
-
 }
