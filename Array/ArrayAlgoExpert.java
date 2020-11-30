@@ -1,5 +1,6 @@
 package Array;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,5 +56,15 @@ public class ArrayAlgoExpert {
         return true;
     }
 
+    public static List<Integer[]> threeNumberSum(int[] array, int targetSum) {
+        // Write your code here.
+        for (int i = 0; i < array.length; i++) {
+            if(array[i] > targetSum) {
+                continue;
+            }
+            
+        }
+        return new ArrayList<Integer[]>();
+    }
 
 }
