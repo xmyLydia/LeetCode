@@ -1,6 +1,7 @@
 package Array;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -58,13 +59,45 @@ public class ArrayAlgoExpert {
 
     public static List<Integer[]> threeNumberSum(int[] array, int targetSum) {
         // Write your code here.
+        int minArrayLength = 3;
+        if (array.length < minArrayLength) {
+            return new ArrayList<>();
+        }
+        List<Integer[]> list = new ArrayList<>();
         for (int i = 0; i < array.length; i++) {
-            if(array[i] > targetSum) {
+            if (array[i] > targetSum) {
                 continue;
             }
-            
+            Arrays.sort(array);
+            Integer[] yDimArray = new Integer[3];
+            int twoSumTarget = targetSum - array[i];
+            int left = i + 1;
+            int right = array.length - 1;
+            while (left < right) {
+                int elementsSum = array[left] + array[right];
+                if (elementsSum == twoSumTarget) {
+                    yDimArray[0] = array[i];
+                    yDimArray[1] = array[left];
+                    yDimArray[2] = array[right];
+                    list.add(yDimArray);
+                    left++;
+                    right--;
+                }else if(elementsSum < twoSumTarget) {
+                    left ++;
+                }else {
+                    right --;
+                }
+            }
+
         }
-        return new ArrayList<Integer[]>();
+        return list;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = new int[] {12, 3, 1, 2, -6, 5, -8, 6};
+        int targetSum = 0;
+        List<Integer[]> result = threeNumberSum(arr, targetSum);
+        System.out.println(result);
     }
 
 }
