@@ -64,11 +64,8 @@ public class ArrayAlgoExpert {
             return new ArrayList<>();
         }
         List<Integer[]> list = new ArrayList<>();
+        Arrays.sort(array);
         for (int i = 0; i < array.length; i++) {
-            if (array[i] > targetSum) {
-                continue;
-            }
-            Arrays.sort(array);
             Integer[] yDimArray = new Integer[3];
             int twoSumTarget = targetSum - array[i];
             int left = i + 1;
@@ -96,8 +93,8 @@ public class ArrayAlgoExpert {
     public static void main(String[] args) {
         int[] arr = new int[] {12, 3, 1, 2, -6, 5, -8, 6};
         int targetSum = 0;
-        List<Integer[]> result = threeNumberSum(arr, targetSum);
-        System.out.println(result);
+        threeNumberSum(arr, targetSum);
+        System.out.println(targetSum);
     }
 
 }
