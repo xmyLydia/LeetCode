@@ -5,10 +5,10 @@ import java.util.Collections;
 
 public class Solution {
     public static void main(String[] args) {
-        int[] arr = new int[]{3, 5, 2, 3};
+        int[] arr = new int[]{-1, -1,0,0,0};
         Solution solution = new Solution();
 
-        solution.removeElement(arr, 3);
+        solution.removeDuplicates(arr);
     }
 
 
@@ -130,5 +130,36 @@ public class Solution {
             }
         }
         return n;
+    }
+
+    public int removeDuplicates(int[] nums) {
+        int currentIndex = 0;
+        int uniqueLength = nums.length;
+        int pivotIndex = currentIndex + 1;
+
+        if (nums.length == 1) {
+            return 1;
+        }
+        int currentVal = nums[currentIndex];
+        int pivotVal = nums[pivotIndex];
+        while (pivotIndex < uniqueLength) {
+            currentVal = nums[currentIndex];
+            pivotVal = nums[pivotIndex];
+            if (currentVal == pivotVal) {
+                pivotIndex++;
+                uniqueLength --;
+                continue;
+            }
+            //until the value is different, move those value to the next position of current value
+            int offset = pivotIndex - currentIndex - 1;
+
+            for (int i = pivotIndex; i < nums.length; i++) {
+                nums[i - offset] = nums[i];
+            }
+            currentIndex++;
+            pivotIndex = currentIndex + 1;
+        }
+
+        return uniqueLength;
     }
 }
