@@ -1,14 +1,20 @@
 package Array;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Solution {
     public static void main(String[] args) {
-        int[] arr = new int[]{-1, -1,0,0,0};
+        int[] arr = new int[]{4, 3, 2, 7, 8, 2, 3, 1};
         Solution solution = new Solution();
 
-        solution.removeDuplicates(arr);
+        solution.findDisappearedNumbers(arr);
     }
 
 
@@ -133,33 +139,123 @@ public class Solution {
     }
 
     public int removeDuplicates(int[] nums) {
-        int currentIndex = 0;
-        int uniqueLength = nums.length;
-        int pivotIndex = currentIndex + 1;
-
-        if (nums.length == 1) {
-            return 1;
-        }
-        int currentVal = nums[currentIndex];
-        int pivotVal = nums[pivotIndex];
-        while (pivotIndex < uniqueLength) {
-            currentVal = nums[currentIndex];
-            pivotVal = nums[pivotIndex];
-            if (currentVal == pivotVal) {
-                pivotIndex++;
-                uniqueLength --;
+        //find the val bigger than current
+        //set the val to pivot, use pivot to record the unique length
+        int pivot = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int n = nums[i];
+            if (pivot == 0) {
+                nums[pivot] = n;
+                pivot++;
                 continue;
             }
-            //until the value is different, move those value to the next position of current value
-            int offset = pivotIndex - currentIndex - 1;
-
-            for (int i = pivotIndex; i < nums.length; i++) {
-                nums[i - offset] = nums[i];
+            if (n > nums[pivot - 1]) {
+                nums[pivot] = n;
+                pivot++;
             }
-            currentIndex++;
-            pivotIndex = currentIndex + 1;
+        }
+        return pivot;
+    }
+
+    /**
+     * @param nums Given an integer array nums,
+     *             move all 0's to the end of it while maintaining
+     *             the relative order of the non-zero elements.
+     */
+    public void moveZeroes(int[] nums) {
+        int readPointer = 0;
+        int writePointer = 0;
+        for (; readPointer < nums.length; readPointer++) {
+            if (nums[readPointer] != 0) {
+                nums[writePointer] = nums[readPointer];
+                writePointer++;
+            }
+        }
+        for (; writePointer < nums.length; writePointer++) {
+            nums[writePointer] = 0;
+        }
+    }
+
+    /**
+     * @param A An array A of non-negative integers
+     * @return an array consisting of all the even elements of A,
+     * followed by all the odd elements of A.
+     */
+    public int[] sortArrayByParity(int[] A) {
+        int readEvenPointer = 0;
+        int writePointer = 0;
+        List<Integer> odds = new ArrayList<>();
+        for (; readEvenPointer < A.length; readEvenPointer++) {
+            int value = A[readEvenPointer];
+            if (value % 2 == 0) {
+                //this is even number
+                A[writePointer] = value;
+                writePointer++;
+            } else {
+                odds.add(value);
+            }
         }
 
-        return uniqueLength;
+        for (int i = 0; i < A.length - writePointer; i++) {
+            A[i + writePointer] = odds.get(i);
+        }
+        return A;
+    }
+
+    /**
+     * @param heights integer array, representing the current order that the students are standing in.
+     *                Each heights[i] is the height of the ith student in line (0-indexed).
+     * @return the number of indices where heights[i] != expected[i].
+     */
+    public int heightChecker(int[] heights) {
+        int numberOfWrongIndex = 0;
+        List<Integer> list = new ArrayList<>();
+        for (int height : heights) {
+            list.add(height);
+        }
+        List<Integer> sortedList = list.stream().sorted().collect(Collectors.toList());
+        for (int i = 0; i < heights.length; i++) {
+            int origin = heights[i];
+            int sorted = sortedList.get(i);
+            if (origin != sorted) {
+                numberOfWrongIndex++;
+            }
+        }
+        return numberOfWrongIndex;
+    }
+
+    /**
+     * @param nums integer array
+     * @return the third maximum number in this array.
+     * If the third maximum does not exist, return the maximum number.
+     */
+    public int thirdMax(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            set.add(num);
+        }
+        List<Integer> sorted = set.stream().sorted().collect(Collectors.toList());
+        if (sorted.size() < 3) {
+            return sorted.get(sorted.size() - 1);
+        } else {
+            return sorted.get(sorted.size() - 3);
+        }
+    }
+
+    /**
+     * @param nums an array nums of n integers where nums[i] is in the range [1, n]
+     * @return an array of all the integers in the range [1, n] that do not appear in nums.
+     */
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        for (int num : nums) {
+            if (num > 0) {
+                num = num * -1;
+            }
+        }
+        List<Integer> list = new ArrayList<>();
+        for(int i = 1; i< nums.length; i++){
+            
+        }
+        return list;
     }
 }
